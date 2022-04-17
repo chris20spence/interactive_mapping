@@ -3,6 +3,9 @@ import pandas
 import base64
 from folium import IFrame
 import cv2
+from find_crds import df
+
+#print(find_crds.get_crds("Paris"))
 
 html = """<h4>Holiday information:</h4>
 Height: %s m
@@ -32,19 +35,22 @@ def image_size(picname):
     borderadd = tuple([1.1*x for x in im.shape])
     return(borderadd)
     
+#Add image hover for all the places in Holiday_data.csv
 
-#Add image hover    
-encoded = base64.b64encode(open('yos.jpg', 'rb').read())
-html = '<img src="data:image/png;base64,{}">'.format
-iframe = IFrame(html(encoded.decode('UTF-8')), width=image_size("yos.jpg")[1], height=image_size("yos.jpg")[0])
-popup = folium.Popup(iframe, max_width=1060)
-
-folium.Marker(location=[37.865101, -119.538330], tooltip=html, popup = popup, 
-icon=folium.Icon(color = 'gray')).add_to(map1)
+for index, row in df.iterrows(): 
+    img_path = "images/"+str(df.loc[index, "Image Name"])+ ".jpg"
+    lon_value = df.loc[index, "lon"]
+    lat_value = df.loc[index, "lat"]
+    encoded = base64.b64encode(open(img_path, 'rb').read())
+    html = '<img src="data:image/png;base64,{}">'.format
+    iframe = IFrame(html(encoded.decode('UTF-8')), width=image_size(img_path)[1], height=image_size(img_path)[0])
+    popup = folium.Popup(iframe) #max_width=1060, parse_html=True)
+    folium.Marker(location=[lat_value, lon_value], tooltip=html, popup = popup, 
+    icon=folium.Icon(color = 'red')).add_to(map1)
 
 #adding the feattures to the map base
 map1.add_child(fgp)
 map1.add_child(folium.LayerControl())
 
 map1.save("Map1_Holiday_Map.html")
-
+print("Map complete")
