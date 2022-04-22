@@ -7,7 +7,7 @@ Open "Map1_Holiday_Map.html" to view a few highlights from the history of my tra
 
 To see how this file is created, check out "Holiday_map.py" , "Holiday_data.csv" and "find_crds.py" 
 
-I also made to other maps "Map2_Volcanoes_by_elevation.html" and "Map3_Population_by_country.html" to demonstrate different applications of folium. 
+I also made two other maps "Map2_Volcanoes_by_elevation.html" and "Map3_Population_by_country.html" to demonstrate different applications of folium. 
 
 Thanks,
 Chris
