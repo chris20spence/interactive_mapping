@@ -5,9 +5,7 @@ from opencage.geocoder import OpenCageGeocode
 key = "7ceff722918946faa1fe35b9f4e9f204"
 geocoder = OpenCageGeocode(key)
 
-df = pd.read_csv("Holiday_data.csv")
-
-#print(df)
+df = pd.read_csv("Holiday_data.csv", sep=",", encoding='cp1252')
 
 df["Combined city/country"] = df["City"].str.strip() + ", " + df["Country"].str.strip() #combines city & country 
 
